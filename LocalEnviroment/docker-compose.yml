@@ -1,0 +1,25 @@
+version: '3.9'
+services:
+  dynamodb:
+    image: instructure/dynamo-local-admin
+    container_name: dynamodb_SessionTokens_container
+    ports:
+      - "8010:8002"
+    volumes:
+      - dynamodb_data:/data
+
+  rds-postgres:
+    image: postgres:15
+    container_name: postgres_Accounts_container
+    ports:
+      - "5544:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: accounts
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  dynamodb_data:
+  postgres_data:

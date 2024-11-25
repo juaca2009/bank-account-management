@@ -1,0 +1,5 @@
+# Crear tabla
+aws dynamodb create-table --table-name SessionTokens --attribute-definitions AttributeName=userId,AttributeType=S --key-schema AttributeName=userId,KeyType=HASH --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 --endpoint-url http://localhost:8010
+
+# Activar TTL
+aws dynamodb update-time-to-live --table-name SessionTokens --time-to-live-specification "Enabled=true, AttributeName=ttl" --endpoint-url http://localhost:8010
